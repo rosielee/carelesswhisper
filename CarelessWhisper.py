@@ -28,9 +28,7 @@ sleepPosition=b'#0 P1380 #1 P2250 #2 P2150 #3 P1520 #4 P1725 T3000\r\n'
 remote_path = "~/Desktop/RosieLee/Whispers/Image.jpg"
 
 photoNumber = 0
-userName = "George"
-expDate = "20150612"
-expName = "passthorugh"
+expTimestamp = "00000000"
 
 def is_image(filename):
     """ File is image if it has a common suffix and it is a regular file """
@@ -93,14 +91,14 @@ class EventHandler(FileSystemEventHandler):
         time.sleep(5)
 
     def takePhoto(self):
-        global photoNumber
+        global photoNumber, expTimestamp
         photoNumber += 1
         destScreen = photoNumber%4 + 1
 
         # destinationFile = "./Screen{}/photo{}.jpg"
         # destinationFile = destinationFile.format(destScreen,photoNumber)
-        destinationFile = "./{}-{}-{}-{}-{}.jpg"
-        destinationFile = destinationFile.format(photoNumber, destScreen, userName, expDate, expName)
+        destinationFile = "./{}-{}-{}.jpg"
+        destinationFile = destinationFile.format(photoNumber, destScreen, expTimestamp)
         command = '/usr/local/Cellar/imagesnap/0.2.5/bin/imagesnap -d "Microsoft® LifeCam HD-6000 for Notebooks" {}'
         command = command.format(destinationFile)
 
